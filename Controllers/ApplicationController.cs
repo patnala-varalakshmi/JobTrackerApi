@@ -1,82 +1,54 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using JobTrackerApi.Data;
 using JobTrackerApi.Models;
+using JobTrackerApi.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JobTrackerApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ApplicationController : ControllerBase
     {
-        private readonly ApplicationContext _context;
+        private readonly IApplicationRepository _repository;
 
-        public ApplicationController(ApplicationContext context)
+        public ApplicationController(IApplicationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Application
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Application>>> GetApplications()
+        public async Task<IActionResult> GetAll()
         {
-            return await _context.Applications.ToListAsync();
+            var apps = await _repository.GetAllAsync();
+            return Ok(apps);
         }
 
-        // GET: api/Application/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Application>> GetApplication(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var application = await _context.Applications.FindAsync(id);
-            if (application == null)
-                return NotFound();
-            return application;
+            var app = await _repository.GetByIdAsync(id);
+            if (app == null) return NotFound();
+            return Ok(app);
         }
 
-        // POST: api/Application
         [HttpPost]
-        public async Task<ActionResult<Application>> CreateApplication(Application application)
+        public async Task<IActionResult> Create(Application app)
         {
-            _context.Applications.Add(application);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetApplication), new { id = application.Id }, application);
+            var newApp = await _repository.AddAsync(app);
+            return CreatedAtAction(nameof(Get), new { id = newApp.Id }, newApp);
         }
 
-        // PUT: api/Application/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateApplication(int id, Application updated)
+        public async Task<IActionResult> Update(int id, Application app)
         {
-            if (id != updated.Id)
-                return BadRequest();
-
-            _context.Entry(updated).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Applications.Any(e => e.Id == id))
-                    return NotFound();
-                else
-                    throw;
-            }
-
+            if (id != app.Id) return BadRequest();
+            await _repository.UpdateAsync(app);
             return NoContent();
         }
 
-        // DELETE: api/Application/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteApplication(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var app = await _context.Applications.FindAsync(id);
-            if (app == null)
-                return NotFound();
-
-            _context.Applications.Remove(app);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
         }
     }
