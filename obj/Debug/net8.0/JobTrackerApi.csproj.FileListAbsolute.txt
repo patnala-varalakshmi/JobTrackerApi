@@ -139,3 +139,9 @@
 /Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/obj/Debug/net8.0/JobTrackerApi.pdb
 /Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/obj/Debug/net8.0/JobTrackerApi.genruntimeconfig.cache
 /Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/obj/Debug/net8.0/ref/JobTrackerApi.dll
+/Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/bin/Debug/net8.0/publish/web.config
+/Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/bin/Debug/net8.0/publish/appsettings.Development.json
+/Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/bin/Debug/net8.0/publish/appsettings.json
+/Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/bin/Debug/net8.0/publish/JobTrackerApi.deps.json
+/Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/bin/Debug/net8.0/publish/JobTrackerApi.runtimeconfig.json
+/Users/varalakshmipatnala/Documents/Practice/Dotnet/JobTrackerApi/bin/Debug/net8.0/publish/JobTrackerApi.staticwebassets.endpoints.json
