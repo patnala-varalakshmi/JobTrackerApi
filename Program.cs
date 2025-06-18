@@ -14,7 +14,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.WithOrigins("http://localhost:3000", "https://victorious-field-01f450a10.1.azurestaticapps.net")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
